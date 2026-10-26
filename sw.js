@@ -2,9 +2,9 @@
    Guarda la aplicación en el dispositivo para abrirla sin conexión.
    NO intercepta SIGPAC ni la ortofoto (otros dominios) y NO toca los datos de las visitas (IndexedDB).
    Al publicar una nueva versión, cambia VERSION para que los móviles la actualicen. */
-const VERSION='v92-6';
+const VERSION='v92-7';
 const CACHE='visitas-jovenes-'+VERSION;
-const SHELL=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./Plantilla_expedientes_recintos.xlsx'];
+const SHELL=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./Plantilla_expedientes_recintos.xlsx','./Manual_visitas_jovenes.pdf'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('visitas-jovenes-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
